@@ -11,6 +11,8 @@ public class Course {
     private Integer credit;
     private Time timeTotal;
     private String info;
+    private String picture;
+    private String content;
     private Collection<Chapter> chaptersById;
     private CourseType courseTypeByCourseTypeId;
     private Collection<CourseAndUser> courseAndUsersById;
@@ -18,6 +20,26 @@ public class Course {
     private Collection<Review> reviewsById;
     private Collection<TeacherAndCourse> teacherAndCoursesById;
     private Collection<UserAndCourse> userAndCoursesById;
+
+    @Basic
+    @Column(name = "picture")
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+
+    @Basic
+    @Column(name = "content")
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     @Id
     @Column(name = "id", nullable = false)

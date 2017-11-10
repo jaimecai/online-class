@@ -13,6 +13,7 @@ public class News {
     private String picture;
     private Date postTime;
     private String content;
+    private String author;
 
     @Id
     @Column(name = "id", nullable = false)
@@ -88,5 +89,15 @@ public class News {
         result = 31 * result + (postTime != null ? postTime.hashCode() : 0);
         result = 31 * result + (content != null ? content.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "author", nullable = true, length = 45)
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 }
