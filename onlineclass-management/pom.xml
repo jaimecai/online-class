@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>base-dependencies</artifactId>
+        <groupId>com.ucai</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../base-dependencies/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>onlineclass-management</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+        <onlineclass.beans.version>1.0-SNAPSHOT</onlineclass.beans.version>
+        <onlineclass.dao.version>1.0-SNAPSHOT</onlineclass.dao.version>
+        <onlineclass.service.version>1.0-SNAPSHOT</onlineclass.service.version>
+        <onlineclass.web.version>1.0-SNAPSHOT</onlineclass.web.version>
+        <onlineclass.config.version>1.0-SNAPSHOT</onlineclass.config.version>
+    </properties>
+     <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.ucai</groupId>
+                <artifactId>onlineclass-beans</artifactId>
+                <version>${onlineclass.beans.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ucai</groupId>
+                <artifactId>onlineclass-dao</artifactId>
+                <version>${onlineclass.dao.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ucai</groupId>
+                <artifactId>onlineclass-service</artifactId>
+                <version>${onlineclass.service.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ucai</groupId>
+                <artifactId>onlineclass-web</artifactId>
+                <version>${onlineclass.web.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ucai</groupId>
+                <artifactId>onlineclass-config</artifactId>
+                <version>${onlineclass.config.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>../base-plugins</module>
+        <module>../base-dependencies</module>
+        <module>../onlineclass-beans</module>
+        <module>../onlineclass-dao</module>
+        <module>../onlineclass-service</module>
+        <module>../onlineclass-web</module>
+        <module>../onlineclass-config</module>
+    </modules>
+</project>
