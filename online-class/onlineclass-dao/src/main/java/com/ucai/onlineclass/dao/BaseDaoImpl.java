@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
 
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
@@ -60,8 +61,16 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     }
 
     @Override
-    public List<T> queryAll() {
-        return null;
+    public List<T> queryAll(String hql,HashMap<String, Object>params) {
+    	List<T> data = this.getHibernateTemplate().execute(new HibernateCallback<List<T>>() {
+            @Override
+            public List<T> doInHibernate(Session session) throws HibernateException {
+                Query qr = session.createQuery(hql);
+                qr.setProperties(params);
+                return qr.list();
+            }
+        });
+        return data;
     }
 
     @Override
