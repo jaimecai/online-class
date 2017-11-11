@@ -4,6 +4,7 @@ package com.ucai.onlineclass.service;
 import com.ucai.onlineclass.dao.IBaseDao;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 public class BaseServiceImpl<T> implements IBaseService<T>{
@@ -36,8 +37,8 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
     }
 
     @Override
-    public List<T> queryAll() {
-        return baseDao.queryAll();
+    public List<T> queryAll(String hql,HashMap<String, Object>params) {
+        return baseDao.queryAll(hql, params);
     }
 
     public void setBaseDao(IBaseDao<T> baseDao){

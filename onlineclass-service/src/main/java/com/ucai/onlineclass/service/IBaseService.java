@@ -1,6 +1,7 @@
 package com.ucai.onlineclass.service;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 public interface IBaseService<T> {
@@ -14,5 +15,5 @@ public interface IBaseService<T> {
 
     T load(Serializable id);
 
-    List<T> queryAll();
+    List<T> queryAll(String hql,HashMap<String , Object>params);
 }
