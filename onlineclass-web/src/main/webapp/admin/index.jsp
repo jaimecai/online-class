@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="css/css.css" type="text/css" rel="stylesheet" />
 </head>
 <!--框架样式-->
-<frameset rows="50,*,30" cols="*" frameborder="no" border="0" framespacing="0">
+<frameset rows="95,*,30" cols="*" frameborder="no" border="0" framespacing="0">
 <!--top样式-->
 	<frame src="admin/top.jsp" name="topframe" scrolling="no" noresize id="topframe" title="topframe" />
 <!--contact样式-->
