@@ -35,22 +35,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </tr>
     </table></td>
   </tr>
-  <tr>
-    <td align="left" valign="bottom">
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td align="left" valign="top" id="header-admin">后台管理系统</td>
-        <td align="left" valign="bottom" id="header-menu">
-        <a target="left" onFocus="this.blur()" id="menuon">后台首页</a>
-        <a target="left" onFocus="this.blur()">用户管理</a>
-        <a target="left" onFocus="this.blur()">栏目管理</a>
-        <a target="left" onFocus="this.blur()">留言管理</a>
-        <a target="left" onFocus="this.blur()">附件管理</a>
-        <a target="left" onFocus="this.blur()">站点管理</a>
-        </td>
-      </tr>
-    </table></td>
-  </tr>
 </table>
 </body>
 </html>
