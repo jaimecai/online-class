@@ -21,7 +21,7 @@
     <section class="row">
         <div class="box">
             <div class="box-header with-border">
-                <button class=".btn">添加课程</button>
+                <button class="btn btn-default">添加课程</button>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
