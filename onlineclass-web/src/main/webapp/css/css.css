@@ -14,7 +14,6 @@ ul,li{ list-style:none; list-style-type:none;}
 .inp{ border:1px solid #d2cf89; text-align:left; width:160px; padding:5px 4px 0px 4px; height:24px; color:#bb1414; background:#656565}
 .inp2{ border:1px solid #d2cf89; text-align:left; width:300px; padding:5px 4px 0px 4px; height:24px; color:#bb1414; background:#656565}
 .cor1{ color:#bb1414}
-.btn1{ FONT-SIZE: 12px; FILTER: progid:DXImageTransform.Microsoft.Gradient(GradientType=0, StartColorStr=#ffffff, EndColorStr=#9a6701); CURSOR: hand; COLOR:#bb1414; padding:4px 4px 1px 4px; border:1px solid #9a6701;}
 a:link,a:visited{ font-size:12px; color:#656565; font-weight:normal; text-decoration:none; font-family:"Microsoft YaHei","Tahoma","Arial",'宋体';}
 a:hover,a:active{ font-size:12px; color:#548fc9; font-weight:normal; text-decoration:none; font-family:"Microsoft YaHei","Tahoma","Arial",'宋体';}
 a.black:link,a.black:visited{ font-size:12px; color:#000000; font-weight:bold; text-decoration:none; font-family:"Microsoft YaHei","Tahoma","Arial",'宋体';}
@@ -64,7 +63,6 @@ div.sdmenu div span {
 	display: block;
 	padding: 0px 25px;
 	font-weight: bold;
-	color: 548fc7;
 	background: url(../images/main/expanded.jpg) no-repeat 10px center;
 	cursor: default;
 	cursor:pointer;

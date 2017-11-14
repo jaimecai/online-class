@@ -1,6 +1,4 @@
 package com.ucai.onlineclass.service;
-
-
 import com.ucai.onlineclass.dao.IBaseDao;
 
 import java.io.Serializable;

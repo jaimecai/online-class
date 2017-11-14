@@ -132,13 +132,4 @@ public class News  implements java.io.Serializable {
 		return "News [id=" + id + ", newsType=" + newsType + ", title=" + title + ", picture=" + picture + ", postTime="
 				+ postTime + ", content=" + content + ", author=" + author + "]";
 	}
-   
-
-
-    
-
-
-
-
-
 }
