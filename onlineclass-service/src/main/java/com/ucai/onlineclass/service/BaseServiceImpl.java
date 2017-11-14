@@ -35,7 +35,13 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
     public T load(Serializable id) {
         return baseDao.get(id);
     }
+    
+    @Override
+    public List<T> find(String hql, Object[] params) {
+        return baseDao.find(hql, params);
+    }
 
+    
     @Override
     public List<T> queryAll(String hql,HashMap<String, Object>params) {
         return baseDao.queryAll(hql, params);

@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table width="100%" border="0" cellspacing="0" cellpadding="0" id="footer">
   <tr>
     <td align="left" valign="middle" class="footer_pad">COPYRIGHT©2012    All rights
-        reserved.<a href="http://www.mycodes.net/" target="_blank">源码之家</a> </td>
+        reserved.<a href="http://www.mycodes.net/" target="_blank">在线学习</a> </td>
     <td align="right" valign="middle" class="footer_pad"><img src="../images/main/why.gif" width="12" height="12" alt="疑问图标" align="absmiddle">&nbsp;&nbsp;如有疑问请您联系TEL：010-88888888-6666</td>
   </tr>
 </table>

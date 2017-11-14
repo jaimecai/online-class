@@ -41,9 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td align="left" valign="top" id="header-admin">后台管理系统</td>
         <td align="left" valign="bottom" id="header-menu">
-        <a target="left" onFocus="this.blur()" id="menuon">后台首页</a>
-        <a target="left" onFocus="this.blur()">用户管理</a>
-        <a target="left" onFocus="this.blur()">栏目管理</a>
+        <a href="index.jsp" target="left" onFocus="this.blur()" id="menuon">后台首页</a>
+        <a target="left" id="menuon1">用户管理</a>
+        <a href="index2.jsp" onFocus="this.blur()">栏目管理</a>
         <a target="left" onFocus="this.blur()">留言管理</a>
         <a target="left" onFocus="this.blur()">附件管理</a>
         <a target="left" onFocus="this.blur()">站点管理</a>

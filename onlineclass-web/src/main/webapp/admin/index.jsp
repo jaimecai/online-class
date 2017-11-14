@@ -15,15 +15,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!--框架样式-->
 <frameset rows="95,*,30" cols="*" frameborder="no" border="0" framespacing="0">
 <!--top样式-->
-	<frame src="admin/top.jsp" name="topframe" scrolling="no" noresize id="topframe" title="topframe" />
+	<frame src="<%=path %>/admin/top.jsp" name="topframe" scrolling="no" noresize id="topframe" title="topframe" />
 <!--contact样式-->
 	<frameset id="attachucp" framespacing="0" border="0" frameborder="no" cols="194,12,*" rows="*">
-		<frame scrolling="auto" noresize="" frameborder="no" name="leftFrame" src="admin/left.jsp"></frame>
-		<frame id="leftbar" scrolling="no" noresize="" name="switchFrame" src="admin/swich.jsp"></frame>
-		<frame scrolling="auto" noresize="" border="0" name="mainFrame" src="admin/main.jsp"></frame>
+		<frame scrolling="auto" noresize="" frameborder="no" name="leftFrame" src="<%=basePath %>admin/left.jsp"></frame>
+		<frame id="leftbar" scrolling="no" noresize="" name="switchFrame" src="<%=basePath %>admin/swich.jsp"></frame>
+		<frame scrolling="auto" noresize="" border="0" name="mainFrame" src="<%=basePath %>admin/main.jsp"></frame>
 	</frameset>
 <!--bottom样式-->
-	<frame src="admin/bottom.jsp" name="bottomFrame" scrolling="No" noresize="noresize" id="bottomFrame" title="bottomFrame" />
+	<frame src="<%=path %>/admin/bottom.jsp" name="bottomFrame" scrolling="No" noresize="noresize" id="bottomFrame" title="bottomFrame" />
 </frameset><noframes></noframes>
 <!--不可以删除-->
 

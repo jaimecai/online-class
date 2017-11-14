@@ -1,103 +1,144 @@
 package com.ucai.onlineclass.pojo;
 
-import javax.persistence.Basic;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.sql.Date;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+
+/**
+ * News entity. @author MyEclipse Persistence Tools
+ */
 @Entity
-public class News {
-    private int id;
-    private String title;
-    private String picture;
-    private Date postTime;
-    private String content;
-    private String author;
+@Table(name="news"
+    ,catalog="online_class"
+)
 
-    @Id
-    @Column(name = "id", nullable = false)
-    public int getId() {
-        return id;
+public class News  implements java.io.Serializable {
+
+
+    // Fields    
+
+     private Integer id;
+     private NewsType newsType;
+     private String title;
+     private String picture;
+     private Date postTime;
+     private String content;
+     private String author;
+
+
+    // Constructors
+
+    /** default constructor */
+    public News() {
     }
 
-    public void setId(int id) {
+    
+    /** full constructor */
+    public News(NewsType newsType, String title, String picture, Date postTime, String content, String author) {
+        this.newsType = newsType;
+        this.title = title;
+        this.picture = picture;
+        this.postTime = postTime;
+        this.content = content;
+        this.author = author;
+    }
+
+   
+    // Property accessors
+    @Id @GeneratedValue
+    
+    @Column(name="id", unique=true, nullable=false)
+
+    public Integer getId() {
+        return this.id;
+    }
+    
+    public void setId(Integer id) {
         this.id = id;
     }
+	@ManyToOne(fetch=FetchType.EAGER)
+        @JoinColumn(name="news_type_id")
 
-    @Basic
-    @Column(name = "title", nullable = true, length = 45)
-    public String getTitle() {
-        return title;
+    public NewsType getNewsType() {
+        return this.newsType;
     }
+    
+    public void setNewsType(NewsType newsType) {
+        this.newsType = newsType;
+    }
+    
+    @Column(name="title", length=45)
 
+    public String getTitle() {
+        return this.title;
+    }
+    
     public void setTitle(String title) {
         this.title = title;
     }
+    
+    @Column(name="picture", length=45)
 
-    @Basic
-    @Column(name = "picture", nullable = true, length = 45)
     public String getPicture() {
-        return picture;
+        return this.picture;
     }
-
+    
     public void setPicture(String picture) {
         this.picture = picture;
     }
+    @Temporal(TemporalType.DATE)
+    @Column(name="post_time", length=10)
 
-    @Basic
-    @Column(name = "post_time", nullable = true)
     public Date getPostTime() {
-        return postTime;
+        return this.postTime;
     }
-
+    
     public void setPostTime(Date postTime) {
         this.postTime = postTime;
     }
+    
+    @Column(name="content", length=45)
 
-    @Basic
-    @Column(name = "content", nullable = true, length = 45)
     public String getContent() {
-        return content;
+        return this.content;
     }
-
+    
     public void setContent(String content) {
         this.content = content;
     }
+    
+    @Column(name="author", length=45)
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        News news = (News) o;
-
-        if (id != news.id) return false;
-        if (title != null ? !title.equals(news.title) : news.title != null) return false;
-        if (picture != null ? !picture.equals(news.picture) : news.picture != null) return false;
-        if (postTime != null ? !postTime.equals(news.postTime) : news.postTime != null) return false;
-        if (content != null ? !content.equals(news.content) : news.content != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (picture != null ? picture.hashCode() : 0);
-        result = 31 * result + (postTime != null ? postTime.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        return result;
-    }
-
-    @Basic
-    @Column(name = "author", nullable = true, length = 45)
     public String getAuthor() {
-        return author;
+        return this.author;
     }
-
+    
     public void setAuthor(String author) {
         this.author = author;
     }
+
+
+	@Override
+	public String toString() {
+		return "News [id=" + id + ", newsType=" + newsType + ", title=" + title + ", picture=" + picture + ", postTime="
+				+ postTime + ", content=" + content + ", author=" + author + "]";
+	}
+   
+
+
+    
+
+
+
+
+
 }
