@@ -18,7 +18,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ucai</groupId>
-			<artifactId>onlineclass-service</artifactId>
+			<artifactId>onlineclass-controller</artifactId>
 		</dependency>
 
 		<dependency>

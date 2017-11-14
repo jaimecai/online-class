@@ -47,7 +47,7 @@ body{overflow-x:hidden; background:url(../images/main/leftbg.jpg) left top repea
       </div>
       <div>
         <span>课程管理</span>
-        <a href="courseAdd.jsp" target="mainFrame" onFocus="this.blur()">课程管理</a>
+        <a href="/course/findAll" target="mainFrame" onFocus="this.blur()">课程管理</a>
         <a href="main_list.jsp" target="mainFrame" onFocus="this.blur()">级别权限</a>
         <a href="main_info.jsp" target="mainFrame" onFocus="this.blur()">角色管理</a>
         <a href="main.jsp" target="mainFrame" onFocus="this.blur()">自定义权限</a>
