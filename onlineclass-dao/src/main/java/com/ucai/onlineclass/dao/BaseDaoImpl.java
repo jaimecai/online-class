@@ -11,7 +11,6 @@ import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.List;
 
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
@@ -56,23 +55,12 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     }
 
     @Override
-    public List<T> find(String hql, Object[] params) {
+    public List<T> find(String hql, Object... params) {
         return (List<T>) this.getHibernateTemplate().find(hql, params);
     }
 
-    @Override
-    public List<T> queryAll(String hql,HashMap<String, Object>params) {
-    	List<T> data = this.getHibernateTemplate().execute(new HibernateCallback<List<T>>() {
-            @Override
-            public List<T> doInHibernate(Session session) throws HibernateException {
-                Query qr = session.createQuery(hql);
-                qr.setProperties(params);
-                return qr.list();
-            }
-        });
-        return data;
-    }
 
+    //分页查询
     @Override
     public List<T> queryPage(String hql, int pageNo, int pageSize, Object... params) {
         List<T> data = this.getHibernateTemplate().execute(new HibernateCallback<List<T>>() {
@@ -91,6 +79,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
         return data;
     }
 
+    //批量更新或者删除
     @Override
     public int updateObjects(String hql, Object[] conditions) {
         int count = this.getHibernateTemplate().execute(new HibernateCallback<Integer>() {
@@ -108,6 +97,11 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
             }
         });
         return count;
+    }
+
+    @Override
+    public List<T> queryAll(String hql) {
+        return (List<T>)this.getHibernateTemplate().find(hql);
     }
 
 }

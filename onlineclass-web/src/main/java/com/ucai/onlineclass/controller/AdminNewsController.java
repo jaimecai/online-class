@@ -24,7 +24,7 @@ public class AdminNewsController {
 	  public ModelAndView toNewslist(){
 		ModelAndView mv = new ModelAndView("/admin/main_news");
 		String hql ="from News n";
- 		List<News> list = newsService.queryAll(hql, null);
+ 		List<News> list = newsService.findAll(hql);
  		System.out.println(list.size());
  		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
  		for(int i=0;i<list.size();i++){
@@ -44,7 +44,7 @@ public class AdminNewsController {
 	public ModelAndView toNewsLikelist(){
 		ModelAndView mv = new ModelAndView("/admin/main_news");
 		String hql ="from News n where";
-		List<News> list = newsService.queryAll(hql, null);
+		List<News> list = newsService.findAll(hql);
 		System.out.println(list.size());
 		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
 		for(int i=0;i<list.size();i++){

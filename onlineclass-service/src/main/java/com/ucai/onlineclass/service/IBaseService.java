@@ -14,8 +14,8 @@ public interface IBaseService<T> {
     T get(Serializable id);
 
     T load(Serializable id);
-
-    List<T> queryAll(String hql,HashMap<String , Object>params);
     
-    public List<T> find(String hql, Object[] params);
+    List<T> find(String hql, Object[] params);
+    List<T> findAll(String hql);
 }
+
