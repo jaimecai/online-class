@@ -12,10 +12,11 @@ public interface IBaseDao<T> {
     T get(Serializable id);
     T load(Serializable id);
 
-    List<T> find(String hql, Object[] params);
+    List<T> find(String hql, Object... params);
 
-    List<T> queryAll(String hql,HashMap<String, Object>map);
     List<T> queryPage(String hql, int pageNo, int pageSize, Object... params);
 
     int updateObjects(final String hql, final Object[] conditions);
+
+    List<T> queryAll(String hql);
 }

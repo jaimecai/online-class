@@ -21,6 +21,29 @@ public class Course {
     private Collection<TeacherAndCourse> teacherAndCoursesById;
     private Collection<UserAndCourse> userAndCoursesById;
 
+    private int favorite;
+    private int studentCount;
+
+    @Basic
+    @Column(name="favorite")
+    public int getFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        this.favorite = favorite;
+    }
+
+    @Basic
+    @Column(name="student_count")
+    public int getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(int studentCount) {
+        this.studentCount = studentCount;
+    }
+
     @Basic
     @Column(name = "picture")
     public String getPicture() {

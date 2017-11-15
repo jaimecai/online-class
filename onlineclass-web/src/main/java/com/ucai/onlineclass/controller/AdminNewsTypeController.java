@@ -34,7 +34,7 @@ public class AdminNewsTypeController {
 	  public ModelAndView toNewsTypelist(){
 		ModelAndView mv = new ModelAndView("/admin/main_news_type");
  		String hql="from NewsType";
- 		List<NewsType> list = newsTypeService.queryAll(hql, null);
+ 		List<NewsType> list = newsTypeService.findAll(hql);
  		List<NewsTypeDto> newsTypeDtos = new ArrayList<NewsTypeDto>();
  		for(int i=0;i<list.size();i++){
  			NewsTypeDto newsTypeDto = new NewsTypeDto();
@@ -58,7 +58,7 @@ public class AdminNewsTypeController {
 		}
 		ModelAndView mv = new ModelAndView("/admin/main_news_type");
 		String hql="from NewsType t where t.type like '%"+newsType+"%'";//'%"+newsType+"%'		
-		List<NewsType> list = newsTypeService.queryAll(hql, null);
+		List<NewsType> list = newsTypeService.findAll(hql);
 		List<NewsTypeDto> newsTypeLike = new ArrayList<NewsTypeDto>();
 		for(int i=0;i<list.size();i++){
 			NewsTypeDto newsTypeDto = new NewsTypeDto();

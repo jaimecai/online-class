@@ -38,14 +38,15 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
     public List<T> find(String hql, Object[] params) {
         return baseDao.find(hql, params);
     }
-
-    
     @Override
-    public List<T> queryAll(String hql,HashMap<String, Object>params) {
-        return baseDao.queryAll(hql, params);
+    public List<T> findAll(String hql) {
+        return baseDao.queryAll(hql);
     }
+    
 
     public void setBaseDao(IBaseDao<T> baseDao){
         this.baseDao=baseDao;
     }
+
+	
 }
