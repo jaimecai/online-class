@@ -29,6 +29,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course> implements ICours
         for(int i=0;i<courses.size();i++){
             CourseDto courseDto=new CourseDto();
             BeanUtils.copyProperties(courses.get(i),courseDto);
+            courseDto.setType(courses.get(i).getCourseTypeByCourseTypeId().getType());
             courseDtos.add(courseDto);
         }
         return courseDtos;

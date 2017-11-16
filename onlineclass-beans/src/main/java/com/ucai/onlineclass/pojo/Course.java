@@ -149,7 +149,7 @@ public class Course {
         this.chaptersById = chaptersById;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.EAGER)
     @JoinColumn(name = "course_type_id", referencedColumnName = "id", nullable = false)
     public CourseType getCourseTypeByCourseTypeId() {
         return courseTypeByCourseTypeId;
