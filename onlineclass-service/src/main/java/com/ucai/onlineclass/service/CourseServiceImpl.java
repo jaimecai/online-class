@@ -35,4 +35,8 @@ public class CourseServiceImpl extends BaseServiceImpl<Course> implements ICours
         return courseDtos;
     }
 
+    @Override
+    public List<CourseDto> findByPage() {
+        return null;
+    }
 }

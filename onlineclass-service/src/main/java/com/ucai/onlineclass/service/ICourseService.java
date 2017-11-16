@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ICourseService extends IBaseService<Course>{
     List<CourseDto> findAll();
+    List<CourseDto> findByPage();
 }
