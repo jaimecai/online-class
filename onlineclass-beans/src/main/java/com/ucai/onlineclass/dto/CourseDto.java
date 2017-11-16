@@ -3,7 +3,7 @@ package com.ucai.onlineclass.dto;
 public class CourseDto {
     private int id;
     private String subject;
-    private String credit;
+    private Integer credit;
     private String type;
     private int favorite;
     private int studentCount;
@@ -24,11 +24,11 @@ public class CourseDto {
         this.subject = subject;
     }
 
-    public String getCredit() {
+    public Integer getCredit() {
         return credit;
     }
 
-    public void setCredit(String credit) {
+    public void setCredit(Integer credit) {
         this.credit = credit;
     }
 
