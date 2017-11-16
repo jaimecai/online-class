@@ -1,24 +1,15 @@
 package com.ucai.onlineclass.controller;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.ucai.onlineclass.dto.NewsTypeDto;
 import com.ucai.onlineclass.pojo.NewsType;
 import com.ucai.onlineclass.service.IAdminNewsTypeService;
@@ -51,11 +42,11 @@ public class AdminNewsTypeController {
 	@RequestMapping("/noticeLike")
 	  public ModelAndView toNewsTypeLikelist(String newsType) throws UnsupportedEncodingException{
 		newsType=new String(newsType.getBytes("8859_1"), "utf8");
-		if(newsType.equals(" ")||newsType==null){
+		/*if(newsType.equals(" ")||newsType==null){
 			AdminNewsTypeController adminNewsTypeController= new AdminNewsTypeController();
 			ModelAndView mv=adminNewsTypeController.toNewsTypelist();
 			return mv;
-		}
+		}*/
 		ModelAndView mv = new ModelAndView("/admin/main_news_type");
 		String hql="from NewsType t where t.type like '%"+newsType+"%'";//'%"+newsType+"%'		
 		List<NewsType> list = newsTypeService.findAll(hql);
@@ -73,10 +64,26 @@ public class AdminNewsTypeController {
 	 * 添加资讯类型
 	 */
 	@RequestMapping("/addNewsType")
-	  public String toAddNewsType(String type){
+	@ResponseBody
+	  public String toAddNewsType(String addNewsType) throws UnsupportedEncodingException{
+		System.out.println(addNewsType);
 		NewsType entity= new NewsType();
-		entity.setType(type);
+		entity.setType(addNewsType);
 		newsTypeService.insert(entity);
-		return "/admin/main_news_type";
+		return "100";
 	 }
+	/*
+	 * 修改资讯类型
+	 */
+	@RequestMapping("/editNewsType")
+	public String toEditNewsType(String newsType,Integer id) throws UnsupportedEncodingException{
+	//	newsType=new String(newsType.getBytes("8859_1"), "utf8");
+		System.out.println(newsType);
+		NewsType entity= new NewsType();
+		entity.setId(id);
+		entity.setType(newsType);
+		newsTypeService.update(entity);
+		return "/admin/main_news_type";
+	}
+
 }
