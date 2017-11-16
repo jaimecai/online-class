@@ -54,7 +54,7 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
   </tr>
   <tr>
     <td align="left" valign="top">
-    <form method="post" action="">
+    <form method="post" action="<%=path%>/addNews">
     <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="right" valign="middle" class="borderright borderbottom bggray">标题：</td>
@@ -93,7 +93,7 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
 	    <option value="1" >&nbsp;&nbsp;系统公告</option>
 	    <option value="2" >&nbsp;&nbsp;课程公告</option>
 	    <option value="3" >&nbsp;&nbsp;公司信息</option>
-	    <option value="3" >&nbsp;&nbsp;部门信息</option>
+	    <option value="4" >&nbsp;&nbsp;部门信息</option>
         </select>
         </td>
       </tr>

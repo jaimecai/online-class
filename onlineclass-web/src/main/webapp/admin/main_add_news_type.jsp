@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="../css/css.css" type="text/css" rel="stylesheet" />
 <link href="../css/main.css" type="text/css" rel="stylesheet" />
 <link rel="shortcut icon" href="../images/main/favicon.ico" />
+<script type="text/javascript" src="<%=path%>/js/jquery-3.2.1.js"></script>
 <style>
 body{overflow-x:hidden; background:#f2f0f5; padding:15px 0px 10px 5px;}
 #searchmain{ font-size:12px;}
@@ -59,14 +60,14 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="right" valign="middle" class="borderright borderbottom bggray">资讯类型：</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">
-        <input type="text" name="newsType" value="" class="text-word">
+        <input type="text" name="newsType" value="" class="text-word"  placeholder="请输入资讯类型" id="addNewsType">
         </td>
         </tr>
       
       <tr onMouseOut="this.style.backgroundColor='#ffffff'" onMouseOver="this.style.backgroundColor='#edf5ff'">
         <td align="right" valign="middle" class="borderright borderbottom bggray">&nbsp;</td>
         <td align="left" valign="middle" class="borderright borderbottom main-for">
-        <input name="" type="submit" value="提交" class="text-but">
+        <input name="" type="button" value="提交" class="text-but" id="add">
         <input name="" type="reset" value="重置" class="text-but"></td>
         </tr>
     </table>
@@ -75,4 +76,16 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
     </tr>
 </table>
 </body>
+<script type="text/javascript">
+	$(function(){
+		$("#add").click(function(){
+			var addNewsType=$("#addNewsType").val();
+			alert("good");
+			$.getJSON("<%=path%>/addNewsType",{addNewsType:addNewsType},function(data){
+				
+					window.location.href="<%=path%>/noticeInfo";
+			});
+		});
+	}) 
+</script>
 </html>

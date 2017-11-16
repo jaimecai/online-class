@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page isELIgnored="false"%>
-<%	
+<%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
@@ -12,10 +12,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>主要内容区main</title>
+<link href="<%=path%>/css/bootstrap.min.css" type="text/css"
+	rel="stylesheet" />
 <link href="<%=path%>/css/css.css" type="text/css" rel="stylesheet" />
 <link href="<%=path%>/css/main.css" type="text/css" rel="stylesheet" />
+
 <link rel="shortcut icon" href="<%=path%>/images/main/favicon.ico" />
 <script type="text/javascript" src="<%=path%>/js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="<%=path%>/js/bootstrap.js"></script>
 <style>
 body {
 	overflow-x: hidden;
@@ -156,15 +160,16 @@ td.fenye {
 					id="search">
 					<tr>
 						<td width="90%" align="left" valign="middle">
-							<form method="post" action="<%=path %>/noticeLike">
+							<form method="post" action="<%=path%>/noticeLike">
 								<span>资讯类型：</span> <input type="text" name="newsType" value=""
 									class="text-word"> <input name="" type="submit"
 									value="查询" class="text-but">
 							</form>
 						</td>
 						<td width="10%" align="center" valign="middle"
-							style="text-align:right; width:150px;"><a href="<%=path %>/admin/main_add_news_type.jsp"
-							target="mainFrame" onFocus="this.blur()" class="add">新增资讯类型</a></td>
+							style="text-align:right; width:150px;"><a
+							href="<%=path%>/admin/main_add_news_type.jsp" target="mainFrame"
+							onFocus="this.blur()" class="add">新增资讯类型</a></td>
 					</tr>
 				</table>
 			</td>
@@ -175,10 +180,11 @@ td.fenye {
 				<table width="100%" border="0" cellspacing="0" cellpadding="0"
 					id="main-tab">
 					<tr>
-						<th align="center" valign="middle" class="borderright">编号</th>
-						<th align="center" valign="middle" class="borderright">资讯类型名称</th>
-						<th align="center" valign="middle">操作</th>
+						<th style="text-align: center" valign="middle" class="borderright">编号</th>
+						<th style="text-align: center" valign="middle" class="borderright">资讯类型名称</th>
+						<th style="text-align: center" valign="middle" class="borderright">操作</th>
 					</tr>
+					<tbody id="typeList"></tbody>
 					<tbody>
 						<c:forEach items="${newsTypeDtos}" var="item">
 
@@ -190,10 +196,11 @@ td.fenye {
 									class="borderright borderbottom">${item.type }</td>
 
 								<td align="center" valign="middle" class="borderbottom"><a
-									href="add.html" target="mainFrame" onFocus="this.blur()"
-									class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a
-									href="add.html" target="mainFrame" onFocus="this.blur()"
-									class="add">删除</a></td>
+									data-toggle="modal"
+									onclick="editNewsTypeBefor('${item.id }','${item.type }')"
+									href="" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span
+									class="gray">&nbsp;|&nbsp;</span><a href="add.html"
+									target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -236,10 +243,68 @@ td.fenye {
 			</td>
 		</tr>
 	</table>
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">资讯类型修改</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-body">
+						资讯类型：<input type="text" name="stuno" id="MType" />
+
+					</div>
+					<%-- <div class="input-group">
+						<span class="input-group-addon" id="basic-addon1">${item.type }</span> <input
+							type="text" class="form-control" placeholder="Username"
+							aria-describedby="basic-addon1">
+					</div> --%>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">确认修改</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
-<%-- <script type="text/javascript">
-			$(function(){
+<script type="text/javascript">
+	 function newsTypeAdd(id){
+		 
+	}
+	<%--	function a(){
+			 $.ajax({
+                      type: "POST", //请求的方式，也有get请求
+                        url: "<%=path%>/noticeInfo", //请求地址，后台提供的,这里我在本地自己建立了个json的文件做例子
+               //       data: {name:name},//data是传给后台的字段，后台需要哪些就传入哪些
+                      dataType: "json", //json格式，后台返回的数据为json格式的。
+                      success: function(result){
+                          var dataObj = result, //返回的result为json格式的数据
+                          con = "";
+                          $.each(dataObj, function(index, item){
+                          		con += "<tr onMouseOut=\"this.style.backgroundColor='#ffffff'\" onMouseOver=\"this.style.backgroundColor='#edf5ff'\">";
+                          		con += "<td align='center' valign='middle' class='borderright borderbottom'>"+item.id+"</td>";
+        						con += "<td align='center' valign='middle' class='borderright borderbottom'>"+item.type+"</td>";
+       							con += "<td align='center' valign='middle' class='borderbottom'><a href='add.html' target='mainFrame' onFocus='this.blur()' class='add'>编辑</a><span class='gray'>&nbsp;|&nbsp;</span><a href='add.html' target='mainFrame' onFocus='this.blur()' class='add'>删除</a></td>";
+                          });
+                          console.log(con);    //可以在控制台打印一下看看，这是拼起来的标签和数据
+                          $("#typeList").html(con); //把内容入到这个div中即完成
+                      }    
+                  })
+		}
+	
+	}) --%>
+	<%-- $(function(){
+		window.location="<%=path%>/noticeInfo";
+	}) --%>
+	<%-- 		$(function(){
        //       $("#btn").on('click', function(){
                  $.ajax({
                       type: "POST", //请求的方式，也有get请求
@@ -260,6 +325,6 @@ td.fenye {
                       }    
                   })
               })
- //         })
-  </script> --%>
+ //         })--%>
+  </script>
 </html>
