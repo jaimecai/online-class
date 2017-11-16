@@ -61,7 +61,7 @@ body{overflow-x:hidden; background:url(../images/main/leftbg.jpg) left top repea
       </div>
     </div>
 </body>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	$(function(){
 		$("#btn").click(function(){
 			console.log(newsType.get(0).getType());
@@ -69,5 +69,5 @@ body{overflow-x:hidden; background:url(../images/main/leftbg.jpg) left top repea
 	
 	})
 
-</script>
+</script> -->
 </html>
