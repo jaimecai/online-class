@@ -9,9 +9,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>我的课程</title>
-    <link href="../css/css.css" type="text/css" rel="stylesheet"/>
-    <link href="../css/main.css" type="text/css" rel="stylesheet"/>
-    <link rel="shortcut icon" href="../images/main/favicon.ico"/>
+    <link href="/css/css.css" type="text/css" rel="stylesheet"/>
+    <link href="/css/main.css" type="text/css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="/images/main/favicon.ico"/>
     <style>
         body {
             overflow-x: hidden;
@@ -54,7 +54,7 @@
             height: 24px;
             line-height: 24px;
             width: 55px;
-            background: url(../images/main/list_input.jpg) no-repeat left top;
+            background: url(/images/main/list_input.jpg) no-repeat left top;
             border: none;
             cursor: pointer;
             font-family: "Microsoft YaHei", "Tahoma", "Arial", '宋体';
@@ -65,7 +65,7 @@
         }
 
         #search a.add {
-            background: url(../images/main/add.jpg) no-repeat -3px 7px #548fc9;
+            background: url(/images/main/add.jpg) no-repeat -3px 7px #548fc9;
             padding: 0 10px 0 26px;
             height: 40px;
             line-height: 40px;
@@ -88,7 +88,7 @@
 
         #main-tab th {
             font-size: 12px;
-            background: url(../images/main/list_bg.jpg) repeat-x;
+            background: url(/images/main/list_bg.jpg) repeat-x;
             height: 32px;
             line-height: 32px;
         }
@@ -165,8 +165,6 @@
         <td align="left" valign="top">
 
             <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
-
-                <tbody id="courseHeader">
                 <tr>
                     <th align="center" valign="middle" class="borderright">编号</th>
                     <th align="center" valign="middle" class="borderright">课程名称</th>
@@ -176,24 +174,37 @@
                     <th align="center" valign="middle" class="borderright">收藏人数</th>
                     <th align="center" valign="middle">操作</th>
                 </tr>
+                <tbody id="courseHeader">
+
                 </tbody>
             </table>
         </td>
     </tr>
     <tr>
-        <td align="left" valign="top" class="fenye">11 条数据 1/1 页&nbsp;&nbsp;<a href="#" target="mainFrame"
-                                                                               onFocus="this.blur()">首页</a>&nbsp;&nbsp;<a
-                href="#" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;<a href="#" target="mainFrame"
-                                                                                        onFocus="this.blur()">下一页</a>&nbsp;&nbsp;<a
-                href="#" target="mainFrame" onFocus="this.blur()">尾页</a></td>
+        <td align="left" valign="top" class="fenye">总共<span id="totalCount"></span>条数据 <span
+                id="currentPage"></span>/<span id="totalPage"></span> 页&nbsp;&nbsp;
+            <a href="javascript:firstPage()" target="mainFrame" onFocus="this.blur()">首页</a>&nbsp;&nbsp;
+            <a href="javascript:prePage()" target="mainFrame" onFocus="this.blur()">上一页</a>&nbsp;&nbsp;
+            <a href="javascript:nextPage()" target="mainFrame" onFocus="this.blur()">下一页</a>&nbsp;&nbsp;
+            <a href="javascript:lastPage()" target="mainFrame" onFocus="this.blur()">尾页</a></td>
     </tr>
 </table>
 <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 <script>
     $(function () {
-        $.getJSON("/course/findAll", function (data) {
+        //首次加载
+        firstPage();
+    })
+    var currentPage = 1;
+    var pageSize = 8;
+    var totalPage;
+    var totalCount;
+
+    function findByPage(pageNum, pageSize) {
+        $.getJSON("/course/findByPage", {pageNum: pageNum, pageSize: pageSize}, function (data) {
             var courses = $("#courseHeader");
             if (data !== null) {
+                courses.empty();
                 for (var i = 0; i < data.length; i++) {
                     var course = " <tr onMouseOut=\"this.style.backgroundColor='#ffffff'\" onMouseOver=\"this.style.backgroundColor='#edf5ff'\"> <td align=\"center\" valign=\"middle\" class=\"borderright borderbottom\">" + data[i].id + "</td>"
                         + "<td align=\"center\" valign=\"middle\" class=\"borderright borderbottom\">" + data[i].subject + "</td>"
@@ -205,11 +216,42 @@
                         + "</tr>";
                     courses.append(course);
                 }
+                //获取总页数和总条数
+                totalPage = data[0].pageInfo.totalPage;
+                totalCount = data[0].pageInfo.totalCount;
+                $("#totalPage").text(totalPage);
+                $("#totalCount").text(totalCount);
+                $("#currentPage").text(currentPage);
             } else {
                 alert("获取数据失败！");
             }
         });
-    })
+    };
+
+    function firstPage() {
+        findByPage(1, pageSize);
+        currentPage = 1;
+    }
+
+    function nextPage() {
+        if (++currentPage > totalPage)
+            alert("已经是最后一页了！");
+        else
+            findByPage(currentPage, pageSize);
+    }
+
+    function prePage() {
+        if (--currentPage < 1)
+            alert("已经是第一页了！")
+        else
+            findByPage(currentPage, pageSize);
+    }
+
+    function lastPage() {
+        findByPage(totalPage, pageSize);
+        currentPage = totalPage;
+    }
+
 </script>
 </body>
 </html>

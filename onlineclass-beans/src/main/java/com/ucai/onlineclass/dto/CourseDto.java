@@ -1,5 +1,9 @@
 package com.ucai.onlineclass.dto;
-
+/**
+ * @author:jaimecai
+ * @date:17-11-18
+ * @description:
+ */
 public class CourseDto {
     private int id;
     private String subject;
@@ -7,6 +11,15 @@ public class CourseDto {
     private String type;
     private int favorite;
     private int studentCount;
+    private PageInfo pageInfo;
+
+    public PageInfo getPageInfo() {
+        return pageInfo;
+    }
+
+    public void setPageInfo(PageInfo pageInfo) {
+        this.pageInfo = pageInfo;
+    }
 
     public int getId() {
         return id;
