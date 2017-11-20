@@ -1,37 +1,28 @@
 package com.ucai.onlineclass.controller;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ucai.onlineclass.dto.NewsTypeDto;
-import com.ucai.onlineclass.pojo.NewsType;
+import com.ucai.onlineclass.dto.ResponseDto;
 import com.ucai.onlineclass.service.IAdminNewsTypeService;
 
 @Controller
 public class AdminNewsTypeController {
 	@Autowired
-    IAdminNewsTypeService newsTypeService;
+	IAdminNewsTypeService adminNewsService;
     /*
      * 查询所有资讯类型
      */
 	@RequestMapping("/noticeInfo")
 	  public ModelAndView toNewsTypelist(){
 		ModelAndView mv = new ModelAndView("/admin/main_news_type");
- 		String hql="from NewsType";
- 		List<NewsType> list = newsTypeService.findAll(hql);
- 		List<NewsTypeDto> newsTypeDtos = new ArrayList<NewsTypeDto>();
- 		for(int i=0;i<list.size();i++){
- 			NewsTypeDto newsTypeDto = new NewsTypeDto();
- 			BeanUtils.copyProperties(list.get(i), newsTypeDto);
- 				newsTypeDtos.add(newsTypeDto);
- 		}	
+		List<NewsTypeDto> newsTypeDtos = new ArrayList<NewsTypeDto>();
+		newsTypeDtos=adminNewsService.toNewsTypelist();
  		mv.addObject("newsTypeDtos", newsTypeDtos);
  		return mv;
  		
@@ -40,24 +31,11 @@ public class AdminNewsTypeController {
 	 * 资讯类型的模糊查询
 	 */
 	@RequestMapping("/noticeLike")
-	  public ModelAndView toNewsTypeLikelist(String newsType) throws UnsupportedEncodingException{
-		newsType=new String(newsType.getBytes("8859_1"), "utf8");
-		/*if(newsType.equals(" ")||newsType==null){
-			AdminNewsTypeController adminNewsTypeController= new AdminNewsTypeController();
-			ModelAndView mv=adminNewsTypeController.toNewsTypelist();
-			return mv;
-		}*/
+	  public ModelAndView toNewsTypeLikelist(String newsType){
 		ModelAndView mv = new ModelAndView("/admin/main_news_type");
-		String hql="from NewsType t where t.type like '%"+newsType+"%'";//'%"+newsType+"%'		
-		List<NewsType> list = newsTypeService.findAll(hql);
 		List<NewsTypeDto> newsTypeLike = new ArrayList<NewsTypeDto>();
-		for(int i=0;i<list.size();i++){
-			NewsTypeDto newsTypeDto = new NewsTypeDto();
-			BeanUtils.copyProperties(list.get(i), newsTypeDto);
-			System.out.println(newsTypeDto.getType());
-			newsTypeLike.add(newsTypeDto);
-		}	
-		mv.addObject("newsTypeLike", newsTypeLike);
+		newsTypeLike=adminNewsService.toNewsTypeLikelist(newsType);	
+		mv.addObject("newsTypeDtos", newsTypeLike);
 		return mv;
 	 }
 	/*
@@ -65,25 +43,29 @@ public class AdminNewsTypeController {
 	 */
 	@RequestMapping("/addNewsType")
 	@ResponseBody
-	  public String toAddNewsType(String addNewsType) throws UnsupportedEncodingException{
+	  public String toAddNewsType(String addNewsType){
 		System.out.println(addNewsType);
-		NewsType entity= new NewsType();
-		entity.setType(addNewsType);
-		newsTypeService.insert(entity);
+		adminNewsService.toAddNewsType(addNewsType);
 		return "100";
 	 }
 	/*
 	 * 修改资讯类型
 	 */
 	@RequestMapping("/editNewsType")
-	public String toEditNewsType(String newsType,Integer id) throws UnsupportedEncodingException{
-	//	newsType=new String(newsType.getBytes("8859_1"), "utf8");
-		System.out.println(newsType);
-		NewsType entity= new NewsType();
-		entity.setId(id);
-		entity.setType(newsType);
-		newsTypeService.update(entity);
-		return "/admin/main_news_type";
+	@ResponseBody
+	public ResponseDto toEditNewsType(Integer cid,String type){
+		System.out.println(cid+"---"+type);
+		ResponseDto responseDto=adminNewsService.toEditNewsType(type, cid);
+		return responseDto;
 	}
-
+	/*
+	 * 删除资讯类型
+	 */
+	@RequestMapping("/delNewsType")
+	@ResponseBody
+	public ResponseDto toDelNewsType(Integer id){
+		System.out.println(id);
+		ResponseDto responseDto=adminNewsService.toDelNewsType(id);
+		return responseDto;
+	}
 }

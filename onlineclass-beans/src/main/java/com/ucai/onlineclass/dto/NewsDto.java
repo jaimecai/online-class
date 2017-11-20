@@ -16,7 +16,7 @@ public class NewsDto {
 	}
 	private String title;
     private String picture;
-    private String postTime;
+    private Date postTime;
     private String content;
     private String author;
 	public Integer getId() {
@@ -43,10 +43,10 @@ public class NewsDto {
 	public void setPicture(String picture) {
 		this.picture = picture;
 	}
-	public String getPostTime() {
+	public Date getPostTime() {
 		return postTime;
 	}
-	public void setPostTime(String postTime) {
+	public void setPostTime(Date postTime) {
 		this.postTime = postTime;
 	}
 	public String getContent() {
@@ -62,7 +62,7 @@ public class NewsDto {
 		this.author = author;
 	}
 	
-	public NewsDto(Integer id, NewsType newsType,String type, String title, String picture, String postTime, String content,
+	public NewsDto(Integer id, NewsType newsType,String type, String title, String picture, Date postTime, String content,
 			String author) {
 		super();
 		this.id = id;

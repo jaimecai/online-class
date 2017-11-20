@@ -1,7 +1,6 @@
 package com.ucai.onlineclass.dao;
 
 import java.io.Serializable;
-import java.util.HashMap;
 import java.util.List;
 
 public interface IBaseDao<T> {
@@ -19,4 +18,5 @@ public interface IBaseDao<T> {
     int updateObjects(final String hql, final Object[] conditions);
 
     List<T> queryAll(String hql);
+    
 }

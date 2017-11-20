@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -30,16 +32,19 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
     public void delete(T entity) {
         this.getHibernateTemplate().delete(entity);
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
     public void update(T entity) {
         this.getHibernateTemplate().update(entity);
     }
 
     @Override
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
     public void insert(T entity) {
         this.getHibernateTemplate().save(entity);
     }
@@ -103,5 +108,6 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     public List<T> queryAll(String hql) {
         return (List<T>)this.getHibernateTemplate().find(hql);
     }
+
 
 }

@@ -6,23 +6,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ucai.onlineclass.pojo.User;
+import com.ucai.onlineclass.service.AdminLoginServiceImpl;
 import com.ucai.onlineclass.service.IAdminLoginService;
 
 @Controller
 public class AdminLoginController {
 	@Autowired
-    IAdminLoginService AdminLoginService;
-
+	IAdminLoginService adminLoginService;
     @RequestMapping("/login")
     public String adminLogin(String username,String pwd){
-    	String hql="from User where username='"+username+"' and password='"+pwd+"'";
-    	List<User> adminList= AdminLoginService.findAll(hql);
-    	System.out.println(adminList.size());
-    	if(adminList.size()!=0){
+    	boolean flag=false;
+    	flag=adminLoginService.adminLogin(username, pwd);
+    	if(flag){
     		return "/admin/index";
-    	}
-
-       return "/admin/login2";
-
+    	}else{
+    		return "/admin/login2";
+    	}       
     }
 }

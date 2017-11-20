@@ -12,19 +12,17 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
     IBaseDao<T> baseDao;
 
     @Override
-    @Transactional(propagation=Propagation.REQUIRED)
     public void delete(T entity) {
         baseDao.delete(entity);
     }
 
     @Override
-    @Transactional(propagation=Propagation.REQUIRED)
     public void update(T entity) {
         baseDao.update(entity);
     }
 
     @Override
-    @Transactional(propagation=Propagation.REQUIRED)
+    
     public void insert(T entity) {
         baseDao.insert(entity);
     }
