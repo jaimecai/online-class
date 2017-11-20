@@ -25,6 +25,7 @@ public class CourseDto {
         return id;
     }
 
+
     public void setId(int id) {
         this.id = id;
     }
@@ -67,5 +68,18 @@ public class CourseDto {
 
     public void setStudentCount(int studentCount) {
         this.studentCount = studentCount;
+    }
+
+    @Override
+    public String toString() {
+        return "CourseDto{" +
+                "id=" + id +
+                ", subject='" + subject + '\'' +
+                ", credit=" + credit +
+                ", type='" + type + '\'' +
+                ", favorite=" + favorite +
+                ", studentCount=" + studentCount +
+                ", pageInfo=" + pageInfo +
+                '}';
     }
 }

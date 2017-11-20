@@ -12,8 +12,12 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
-
-public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
+/**
+ * @author:jaimecai
+ * @date:17-11-19 下午6:34
+ * @description:
+ */
+public abstract class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     private Class<T> entityClass;
 
     public BaseDaoImpl() {
@@ -101,8 +105,8 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     }
 
     @Override
-    public List<T> queryAll(String hql) {
-        return (List<T>) this.getHibernateTemplate().find(hql);
+    public List<T> queryAll() {
+        String hql="from "+entityClass.getSimpleName();
+        return (List<T>)this.getHibernateTemplate().find(hql);
     }
-
 }

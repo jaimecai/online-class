@@ -4,6 +4,7 @@ import com.ucai.onlineclass.dao.ICourseDao;
 import com.ucai.onlineclass.dto.CourseDto;
 import com.ucai.onlineclass.dto.PageInfo;
 import com.ucai.onlineclass.pojo.Course;
+import com.ucai.onlineclass.pojo.CourseType;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author:jaimecai
+ * @date:17-11-19 下午6:30
+ * @description:
+ */
 @Service
 public class CourseServiceImpl extends BaseServiceImpl<Course> implements ICourseService{
     private ICourseDao courseDao;
@@ -24,8 +29,7 @@ public class CourseServiceImpl extends BaseServiceImpl<Course> implements ICours
 
     @Override
     public List<CourseDto> findAll(){
-        String hql="from Course";
-        List<Course> courses=this.findAll(hql);
+        List<Course> courses=courseDao.queryAll();
         List<CourseDto> courseDtos=new ArrayList<>();
         courseDtos=copyCourseDto(courses,courseDtos);
         return courseDtos;
@@ -67,7 +71,9 @@ public class CourseServiceImpl extends BaseServiceImpl<Course> implements ICours
             CourseDto courseDto=new CourseDto();
             BeanUtils.copyProperties(courses.get(i),courseDto);
             courseDto.setType(courses.get(i).getCourseTypeByCourseTypeId().getType());
-            courseDto.setPageInfo((PageInfo) params[0]);
+            if(params.length>0) {
+                courseDto.setPageInfo((PageInfo) params[0]);
+            }
             courseDtos.add(courseDto);
         }
         return courseDtos;

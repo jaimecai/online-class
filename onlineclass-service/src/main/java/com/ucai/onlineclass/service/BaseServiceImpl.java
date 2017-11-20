@@ -6,7 +6,11 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
+/**
+ * @author:jaimecai
+ * @date:17-11-19 下午6:30
+ * @description:
+ */
 public class BaseServiceImpl<T> implements IBaseService<T>{
 
     IBaseDao<T> baseDao;
@@ -46,8 +50,8 @@ public class BaseServiceImpl<T> implements IBaseService<T>{
         return (List<T>)baseDao.find(hql, params);
     }
     @Override
-    public List<T> findAll(String hql) {
-        return baseDao.queryAll(hql);
+    public List<?> findAll() {
+        return baseDao.queryAll();
     }
 
     public void setBaseDao(IBaseDao<T> baseDao){

@@ -156,7 +156,7 @@
                         </form>
                     </td>
                     <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;"><a
-                            href="add.html" target="mainFrame" onFocus="this.blur()" class="add">添加课程</a></td>
+                            href="/course/addCourseBefore" target="mainFrame" onFocus="this.blur()" class="add">添加课程</a></td>
                 </tr>
             </table>
         </td>
@@ -251,6 +251,7 @@
         findByPage(totalPage, pageSize);
         currentPage = totalPage;
     }
+
 
 </script>
 </body>

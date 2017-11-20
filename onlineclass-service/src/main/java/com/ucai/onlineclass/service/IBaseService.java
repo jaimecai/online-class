@@ -3,7 +3,11 @@ package com.ucai.onlineclass.service;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * @author:jaimecai
+ * @date:17-11-19 下午6:30
+ * @description:
+ */
 public interface IBaseService<T> {
     void delete(T entity);
 
@@ -16,6 +20,6 @@ public interface IBaseService<T> {
     T load(Serializable id);
     
     List<T> find(String hql, Object[] params);
-    List<T> findAll(String hql);
+    List<?> findAll();
 }
 

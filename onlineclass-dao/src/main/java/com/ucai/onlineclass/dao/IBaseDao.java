@@ -3,7 +3,11 @@ package com.ucai.onlineclass.dao;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
-
+/**
+ * @author:jaimecai
+ * @date:17-11-19 下午6:34
+ * @description:
+ */
 public interface IBaseDao<T> {
     void delete(T entity);
     void update(T entity);
@@ -18,5 +22,5 @@ public interface IBaseDao<T> {
 
     int updateObjects(final String hql, final Object[] conditions);
 
-    List<T> queryAll(String hql);
+    List<T> queryAll();
 }

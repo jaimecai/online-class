@@ -16,7 +16,7 @@ public class AdminLoginController {
     @RequestMapping("/login")
     public String adminLogin(String username,String pwd){
     	String hql="from User where username='"+username+"' and password='"+pwd+"'";
-    	List<User> adminList= AdminLoginService.findAll(hql);
+    	List<User> adminList= AdminLoginService.find(hql,null);
     	System.out.println(adminList.size());
     	if(adminList.size()!=0){
     		return "/admin/index";
