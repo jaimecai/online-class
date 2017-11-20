@@ -60,9 +60,10 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
     }
 
     @Override
-    public List<T> find(String hql, Object... params) {
-        return (List<T>) this.getHibernateTemplate().find(hql, params);
+    public List<?> find(String hql, Object... params) {
+        return this.getHibernateTemplate().find(hql, params);
     }
+
 
 
     //分页查询
@@ -106,7 +107,7 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements IBaseDao<T> {
 
     @Override
     public List<T> queryAll(String hql) {
-        return (List<T>)this.getHibernateTemplate().find(hql);
+        return (List<T>) this.getHibernateTemplate().find(hql);
     }
 
 
