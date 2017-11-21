@@ -23,7 +23,7 @@ public class AdminLoginServiceImpl extends BaseServiceImpl<User> implements IAdm
 		String[] params={username,pwd} ;
     	List<User> adminList= this.find(hql, params);
     	System.out.println(adminList.size());
-    	if(adminList.size()!=0){
+    	if(adminList.size()!=0){   		
     		return true;
     	}
        return false;

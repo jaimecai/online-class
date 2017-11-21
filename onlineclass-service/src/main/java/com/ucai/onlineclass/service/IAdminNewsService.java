@@ -9,5 +9,5 @@ public interface IAdminNewsService extends IBaseService<News>{
 	//查询所有资讯信息
 	List<NewsDto> toNewslist();
 	//	  资讯信息的模糊查询 
-	List<NewsDto> toNewsLikelist();
+	List<NewsDto> toNewsLikelist(String news,String newsStartTime,String newsEndTime);
 }

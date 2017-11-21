@@ -161,12 +161,12 @@ td.fenye {
 							<form method="post" action="<%=path %>/newsInfoLike">
 								<div id="contu-order1">
 									<span>资讯信息：</span>	<input type="text" name="news"
-									 value=""	class="text-word"> 
-									<span>日期：</span><input type="text" class="number-small 
-									date start text-word" name="newsStartTime"/><span class="padding-hor-sm">至&nbsp;
-									&nbsp;</span><input type="text" class="number-small date end text-word"
+									 value="" placeholder="请输入关键字"	class="text-word"> 
+									<span>日期：</span><input type="text" class="number-small  
+									date start text-word" name="newsStartTime" placeholder="请输入起始日期"/><span class="padding-hor-sm">至&nbsp;
+									&nbsp;</span><input type="text" class="number-small date end text-word" placeholder="请输入终止 日期"
 									 name="newsEndTime"/>
-									<input name="newsInfo" type="button" value="查询" class="text-but">
+									<input name="newsInfo" type="submit" value="查询" class="text-but">
 								</div>	
 							</form>
 						</td>

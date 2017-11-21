@@ -38,9 +38,11 @@ public class AdminNewsImpl extends BaseServiceImpl<News> implements IAdminNewsSe
 	}
 	//资讯信息的模糊查询
 	@Override
-	public List<NewsDto> toNewsLikelist() {
-		String hql ="from News n where";
-		List<News> list = this.findAll(hql);
+	public List<NewsDto> toNewsLikelist(String news,String newsStartTime,String newsEndTime) {
+		String hql ="from News n where n.title like '%"+"?"+"%' or n.newsType.type like '%"+news+"%'";//or (postTime>'?' and postTime<'?')";
+		String []params=new String[3];
+		params[0]=news;
+		List<News> list = this.find(hql,null);//new String[]{news,newsStartTime,newsEndTime}
 		System.out.println(list.size());
 		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
 		for(int i=0;i<list.size();i++){

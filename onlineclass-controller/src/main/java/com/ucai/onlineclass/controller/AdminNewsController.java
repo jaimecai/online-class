@@ -1,4 +1,5 @@
 package com.ucai.onlineclass.controller;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,16 +29,16 @@ public class AdminNewsController {
 		newsDtos=adminNewsService.toNewslist();
  		mv.addObject("newsDtos", newsDtos);
  		return mv;
- 		
  	 }
 	/*
 	 * 资讯信息的模糊查询
 	 */
 	@RequestMapping("/newsInfoLike")
-	public ModelAndView toNewsLikelist(){
+	public ModelAndView toNewsLikelist(String news,String newsStartTime,String newsEndTime) throws UnsupportedEncodingException{
 		ModelAndView mv = new ModelAndView("/admin/main_news");
+		news=new String(news.getBytes("8859_1"), "utf8");
 		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
-		newsDtos=adminNewsService.toNewsLikelist();
+		newsDtos=adminNewsService.toNewsLikelist(news,newsStartTime,newsEndTime);
 		mv.addObject("newsDtos", newsDtos);
 		return mv;
 		
