@@ -80,7 +80,7 @@ td.fenye{ padding:10px 0 0 0; text-align:right;}
 	$(function(){
 		$("#add").click(function(){
 			var addNewsType=$("#addNewsType").val();
-			alert("good");
+			alert("good"+"---"+addNewsType);
 			$.getJSON("<%=path%>/addNewsType",{addNewsType:addNewsType},function(data){
 				
 					window.location.href="<%=path%>/noticeInfo";

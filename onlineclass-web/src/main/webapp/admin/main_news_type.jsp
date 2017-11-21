@@ -161,7 +161,7 @@ td.fenye {
 					<tr>
 						<td width="90%" align="left" valign="middle">
 							<form method="post" action="<%=path%>/noticeLike">
-								<span>资讯类型：</span> <input type="text" name="newsType" value=""
+								<span>资讯类型：</span> <input type="text" name="newsType" value="" placeholder="请输入类型名称"
 									class="text-word"> <input name="" type="submit"
 									value="查询" class="text-but">
 							</form>
@@ -184,8 +184,7 @@ td.fenye {
 						<th style="text-align: center" valign="middle" class="borderright">资讯类型名称</th>
 						<th style="text-align: center" valign="middle" class="borderright">操作</th>
 					</tr>
-					<tbody id="typeList"></tbody>
-					<tbody>
+					<tbody id="typeList">
 						<c:forEach items="${newsTypeDtos}" var="item">
 
 							<tr onMouseOut="this.style.backgroundColor='#ffffff'"
@@ -197,40 +196,13 @@ td.fenye {
 
 								<td align="center" valign="middle" class="borderbottom"><a
 									data-toggle="modal"
-									onclick="editNewsTypeBefor('${item.id }','${item.type }')"
+									onclick="editNewsTypeBefore('${item.id }','${item.type }')"
 									href="" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span
-									class="gray">&nbsp;|&nbsp;</span><a href="add.html"
-									target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
+									class="gray">&nbsp;|&nbsp;</span><a href="" onclick="delNewsTypeBefore('${item.id }','${item.type }')"
+									data-toggle="modal" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
-					<tbody>
-						<c:forEach items="${newsTypeLike}" var="item">
-
-							<tr onMouseOut="this.style.backgroundColor='#ffffff'"
-								onMouseOver="this.style.backgroundColor='#edf5ff'">
-								<td align="center" valign="middle"
-									class="borderright borderbottom">${item.id }</td>
-								<td align="center" valign="middle"
-									class="borderright borderbottom">${item.type }</td>
-
-								<td align="center" valign="middle" class="borderbottom"><a
-									href="add.html" target="mainFrame" onFocus="this.blur()"
-									class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a
-									href="add.html" target="mainFrame" onFocus="this.blur()"
-									class="add">删除</a></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-					<!-- <tr class="bggray" onMouseOut="this.style.backgroundColor='#f9f9f9'" onMouseOver="this.style.backgroundColor='#edf5ff'">
-        <td align="center" valign="middle" class="borderright borderbottom">2</td>
-        <td align="center" valign="middle" class="borderright borderbottom">admin</td>
-        <td align="center" valign="middle" class="borderright borderbottom">创始人</td>
-        <td align="center" valign="middle" class="borderright borderbottom">已锁定</td>
-        <td align="center" valign="middle" class="borderright borderbottom">2013-04-26 11:00:59</td>
-        <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onFocus="this.blur()" class="add">删除</a></td>
-      </tr> -->
-
 				</table>
 			</td>
 		</tr>
@@ -243,88 +215,133 @@ td.fenye {
 			</td>
 		</tr>
 	</table>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+	<!-- Modal 修改资讯类型的模态框-->
+	<div class="modal fade" id="update" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header bg-primary">
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<h4 class="modal-title" id="myModalLabel">资讯类型修改</h4>
+					<h4 class="modal-title" id="myModalLabel" style="color:white; font-weight: bold;">资讯类型修改</h4>
 				</div>
 				<div class="modal-body">
 					<div class="modal-body">
-						资讯类型：<input type="text" name="stuno" id="MType" />
-
+						<div class="input-group">
+							<span class="input-group-addon" id="sizing-addon2" style="font-weight: bold;">资讯类型：</span>
+								<input type="text" class="form-control" placeholder="请输入类型名称"
+								aria-describedby="sizing-addon2" type="text" name="MType" id="MType">
+						</div>
+						<input type="hidden" name="cid" id="cid" value="" />
 					</div>
-					<%-- <div class="input-group">
-						<span class="input-group-addon" id="basic-addon1">${item.type }</span> <input
-							type="text" class="form-control" placeholder="Username"
-							aria-describedby="basic-addon1">
-					</div> --%>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">确认修改</button>
+					<button type="button" class="btn btn-primary" onclick="updateNow()">确认修改</button>
 					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	<!-- Modal 信息提示的模态框-->
+	<div class="modal fade" id="mess" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-primary">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel" style="color:white; font-weight: bold;">信息提示</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-body">
+						<div>
+							<span id="message" style="text-align: center; font-weight: bold;"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- Modal 删除提示的模态框-->
+	<div class="modal fade" id="delMess" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header bg-primary">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel" style="color:white; font-weight: bold;">删除信息提示</h4>
+				</div>
+				<div class="modal-body">
+					<div class="modal-body">
+						<div class="input-group">
+							<span>是否删除<span id="del" style="color: red"></span>类型？</span>
+						</div>
+						<input type="hidden" name="id" id="id" value="" />
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" onclick="delAction()">确认删除</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 <script type="text/javascript">
-	 function newsTypeAdd(id){
-		 
+	//点击修改后执行（向模态框中传值 ）
+	 function editNewsTypeBefore(id,type){
+    //向模态框中传值  
+    $('#MType').val(type);  
+    $('#cid').val(id);
+    $('#update').modal('show');
 	}
-	<%--	function a(){
-			 $.ajax({
-                      type: "POST", //请求的方式，也有get请求
-                        url: "<%=path%>/noticeInfo", //请求地址，后台提供的,这里我在本地自己建立了个json的文件做例子
-               //       data: {name:name},//data是传给后台的字段，后台需要哪些就传入哪些
-                      dataType: "json", //json格式，后台返回的数据为json格式的。
-                      success: function(result){
-                          var dataObj = result, //返回的result为json格式的数据
-                          con = "";
-                          $.each(dataObj, function(index, item){
-                          		con += "<tr onMouseOut=\"this.style.backgroundColor='#ffffff'\" onMouseOver=\"this.style.backgroundColor='#edf5ff'\">";
-                          		con += "<td align='center' valign='middle' class='borderright borderbottom'>"+item.id+"</td>";
-        						con += "<td align='center' valign='middle' class='borderright borderbottom'>"+item.type+"</td>";
-       							con += "<td align='center' valign='middle' class='borderbottom'><a href='add.html' target='mainFrame' onFocus='this.blur()' class='add'>编辑</a><span class='gray'>&nbsp;|&nbsp;</span><a href='add.html' target='mainFrame' onFocus='this.blur()' class='add'>删除</a></td>";
-                          });
-                          console.log(con);    //可以在控制台打印一下看看，这是拼起来的标签和数据
-                          $("#typeList").html(con); //把内容入到这个div中即完成
-                      }    
-                  })
-		}
-	
-	}) --%>
-	<%-- $(function(){
-		window.location="<%=path%>/noticeInfo";
-	}) --%>
-	<%-- 		$(function(){
-       //       $("#btn").on('click', function(){
-                 $.ajax({
-                      type: "POST", //请求的方式，也有get请求
-                        url: "<%=path%>/noticeInfo", //请求地址，后台提供的,这里我在本地自己建立了个json的文件做例子
-               //       data: {name:name},//data是传给后台的字段，后台需要哪些就传入哪些
-                      dataType: "json", //json格式，后台返回的数据为json格式的。
-                      success: function(result){
-                          var dataObj = result, //返回的result为json格式的数据
-                          con = "";
-                          $.each(dataObj, function(index, item){
-                          		con += "<tr onMouseOut=\"this.style.backgroundColor='#ffffff'\" onMouseOver=\"this.style.backgroundColor='#edf5ff'\">";
-                          		con += "<td align='center' valign='middle' class='borderright borderbottom'>"+item.id+"</td>";
-        						con += "<td align='center' valign='middle' class='borderright borderbottom'>"+item.type+"</td>";
-       							con += "<td align='center' valign='middle' class='borderbottom'><a href='add.html' target='mainFrame' onFocus='this.blur()' class='add'>编辑</a><span class='gray'>&nbsp;|&nbsp;</span><a href='add.html' target='mainFrame' onFocus='this.blur()' class='add'>删除</a></td>";
-                          });
-                          console.log(con);    //可以在控制台打印一下看看，这是拼起来的标签和数据
-                          $("#newsType").html(con); //把内容入到这个div中即完成
-                      }    
-                  })
-              })
- //         })--%>
+	//弹出修改信息框
+	function updateNow(){
+		//获取模态框数据  
+	    var type = $('#MType').val();  
+	    var cid =$('#cid').val();
+	    console.log(type);
+	    //向后台发送请求
+	    $.getJSON("<%=path%>/editNewsType",{type:type,cid:cid},function(data){
+	    	$('#update').modal('hide');
+	    	$('#mess').modal('show');//显示信息提示框（提示是否修改成功）
+	    	console.log(data.code);
+	    	console.log(data.message);
+	    	$('#message').text(data.message);//将提示信息传入提示框
+	    	setTimeout(function(){
+	    		$('#mess').modal('hide');//隐藏模态框
+	    		//回到原来界面
+	    		window.location.href="<%=path%>/noticeInfo";
+	    	},800);
+	    });
+	}
+	//点击删除执行
+	function delNewsTypeBefore(id,type){
+	//向模态框传值
+		$('#del').text(type);
+		$('#id').val(id);
+		$('#delMess').modal('show');//显示模态框
+	}
+	//执行删除
+	function delAction(){
+		var id =$('#id').val();//向后台发送请求
+		$('#delMess').modal('hide');//隐藏模态框
+		$.getJSON("<%=path%>/delNewsType",{id:id},function(data){
+			$('#message').text(data.message);
+			$('#mess').modal('show');
+			setTimeout(function(){
+	    		$('#mess').modal('hide');
+	    		//回到原来界面
+	    		window.location.href="<%=path%>/noticeInfo";
+	    	},800);
+		});
+	}
   </script>
 </html>

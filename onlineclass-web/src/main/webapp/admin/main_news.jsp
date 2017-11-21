@@ -16,6 +16,8 @@
 <link href="<%=path%>/css/main.css" type="text/css" rel="stylesheet" />
 <link rel="shortcut icon" href="<%=path%>/images/main/favicon.ico" />
 <script type="text/javascript" src="<%=path%>/js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="<%=path%>/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=path%>/css/bootstrap-datepicker.min.css" />
 <style>
 body {
 	overflow-x: hidden;
@@ -157,9 +159,15 @@ td.fenye {
 					<tr>
 						<td width="90%" align="left" valign="middle">
 							<form method="post" action="<%=path %>/newsInfoLike">
-								<span>资讯信息：</span> <input type="text" name="" value=""
-									class="text-word"> <input name="newsInfo" type="button"
-									value="查询" class="text-but">
+								<div id="contu-order1">
+									<span>资讯信息：</span>	<input type="text" name="news"
+									 value="" placeholder="请输入关键字"	class="text-word"> 
+									<span>日期：</span><input type="text" class="number-small  
+									date start text-word" name="newsStartTime" placeholder="请输入起始日期"/><span class="padding-hor-sm">至&nbsp;
+									&nbsp;</span><input type="text" class="number-small date end text-word" placeholder="请输入终止 日期"
+									 name="newsEndTime"/>
+									<input name="newsInfo" type="submit" value="查询" class="text-but">
+								</div>	
 							</form>
 						</td>
 						<td width="10%" align="center" valign="middle"
@@ -235,6 +243,12 @@ td.fenye {
 	</table>
 
 </body>
+<script type="text/javascript">
+	    $('#contu-order1 .date ,#contu-order2 .date ,#contu-order3 .date ,#contu-order4 .date ,#contu-order5 .date').datepicker({
+	        'format': 'yyyy-mm-dd',
+	        'autoclose': true
+	    });
+</script>
 <%-- <script type="text/javascript">
 			$(function(){
        //       $("#btn").on('click', function(){
